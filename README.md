@@ -1,6 +1,14 @@
 # Draw My Thing Cheat
-The goal of this project is to help people get really good score using an interactive word list for the Draw My Thing on Mineplex server. Currently, this only works on Google Chrome and Safari.
+You can use this tool from https://github.com/Croutonix/dmtcheat. The goal of this project is to provide an easy way to get pretty good at Draw my thing, on the Mineplex server. Legitimately. Hmmm... totally.
 
-You can contribute to this project mostly by adding words to the <i>word_list.txt</i> file when you notice they are missing. Don't forget to add the words in alphabetical order and separate them using commas. If you are really experienced, you could try making it work for other browsers such as Firefox (the problem seems to be in the event not triggering on textboxes)
+# Newly added features
+- Support for most modern browsers: Firefox, Chrome, Safari, Edge, IE...
+- Changed UI to look smoother: modals instead of different page for help and word list, slider instead of length buttons, etc. I decided to use Bootstrap because it's a quick an easy way to make thing look good.
+- You can now navigate between hint inputs with the arrows, and delete the letter with the cursor at any position with the DEL or backspace keys.
+- Added a _Show more_ button instead of showing all the words found. Only the 15 first are displayed.
+- Word list is now automatically sorted in alphabetical order. This is better because you don't have to order when adding words.
 
-Last thing, you could share this with your friends and with other players on Mineplex, this way it will spread faster, more words will be discovered, making it more reliable.
+# Contribute
+You can contribute to this project mostly by adding words to the _wordlist.txt_ file if you notice any are missing. Don't forget to separe each with a comma. No need to add them in alphabetical order.
+
+Also, if you could share this with your friends and with other players on Mineplex, I would be really glad! This way it will spread faster, more words will be discovered, making it more reliable.
