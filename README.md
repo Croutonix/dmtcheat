@@ -12,3 +12,5 @@ You can use this tool from https://github.com/Croutonix/dmtcheat. The goal of th
 You can contribute to this project mostly by adding words to the _wordlist.txt_ file if you notice any are missing. Don't forget to separe each with a comma. No need to add them in alphabetical order.
 
 Also, if you could share this with your friends and with other players on Mineplex, I would be really glad! This way it will spread faster, more words will be discovered, making it more reliable.
+
+Note that you can use any of this code for any purpose, including selling it. Good luck with the last point though.
