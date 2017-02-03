@@ -1,219 +1,99 @@
 <!DOCTYPE html>
 <html>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.1/css/bootstrap-slider.min.css"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.1/bootstrap-slider.min.js"></script>
+
 	<head>
 		<title>Draw My Thing Cheat</title>
 	</head>
-	<style>
-		body {
-			font-family: Arial, Helvetica, sans-serif;
-		}
-		p {
-			margin: 0px 0px;
-		}
-		table, th, td {
-	    	border: none;
-	    	border-collapse: collapse;
-		}
-		th, td {
-	    	padding: 5px 5px;
-	    	align: center;
-		}
-		input[type=text] {
-			width: 20px;
-			padding: 5px 10px;
-			margin: 5px 0px;
-			font-size: 16px;
-			border: none;
-			border-bottom: 3px solid #DDD;
-	        -webkit-transition: 0.5s;
-    		transition: 1s;
-    		outline: none;
-    		text-align: center;
-		}
-		input[type=text]:focus {
-			border: none;
-    		border-bottom: 3px solid black;
-		}
-		.toggle-radio {
-			display: none;
-		}
-		.toggle-label { 
-		    text-align: center; 
-		    margin: 3px 3px;
-		    padding: 5px 10px; 
-		    color: #000; 
-		    background-color: #FFF;
-		    border: 3px solid #DDD;
-		    border-radius: 5px; 
-    		font-size: 16px;
-    		font-weight: bold;
-		    display: inline-block; 
- 			cursor: pointer;
- 	        -webkit-transition: 0.5s;
-    		transition: 0.5s;
-		}
-		.toggle-label:hover {
-    		border-color: #555;
-    	}
-    	.toggle-radio:checked + .toggle-label{
-    		border-color: #000;
-    	}
-	</style>
+
+	<link rel="stylesheet" href="./style.css">
+
 	<body>
 		<center>
-		<br>
-		Please share and give feedback!
-		<table>
-			<tr>
-				<td><a href="./help.html">Help</a></td><td></td>
-				<td><a href="https://docs.google.com/forms/d/1XmS9zlGEHBjO_rTXBxB8fQPWgWP0opWgsAJdjt3xt6s/viewform" target="_blank">Give Feedback</a></td><td></td>
-				<td><a href="./wordlist.html">Word List</a></td><td></td>
-				<td><a href="https://github.com/Croutonix/dmtcheat" target="_blank">Contribute</a></td>
-			</tr>
-		</table>
-		<h2 style="margin: 0px 0px;">Draw My Thing Cheat</h2><br>
-		Select the word length
-		<table>
-			<tr>
-				<form autocomplete="off">
-				<td><input type="radio" class="toggle-radio" id="length2" name="length"/>
-				<label onclick="changeLength(2)" class="toggle-label" for="length2">2</label>
-				<input type="radio" class="toggle-radio" id="length3" name="length"/>
-				<label onclick="changeLength(3)" class="toggle-label" for="length3">3</label>
-				<input type="radio" class="toggle-radio" id="length4" name="length"/>
-				<label onclick="changeLength(4)" class="toggle-label" for="length4">4</label>
-				<input type="radio" class="toggle-radio" id="length5" name="length" checked="checked"/>
-				<label onclick="changeLength(5)" class="toggle-label" for="length5">5</label>
-				<input type="radio" class="toggle-radio" id="length6" name="length"/>
-				<label onclick="changeLength(6)" class="toggle-label" for="length6">6</label>
-				<input type="radio" class="toggle-radio" id="length7" name="length"/>
-				<label onclick="changeLength(7)" class="toggle-label" for="length7">7</label>
-				<input type="radio" class="toggle-radio" id="length8" name="length"/>
-				<label onclick="changeLength(8)" class="toggle-label" for="length8">8</label>
-				<input type="radio" class="toggle-radio" id="length9" name="length"/>
-				<label onclick="changeLength(9)" class="toggle-label" for="length9">9</label>
-				<input type="radio" class="toggle-radio" id="length10" name="length"/>
-				<label onclick="changeLength(10)" class="toggle-label" for="length10">10</label>
-				<input type="radio" class="toggle-radio" id="length11" name="length"/>
-				<label onclick="changeLength(11)" class="toggle-label" for="length11">11</label></td>
-				<td><input type="radio" class="toggle-radio" id="length12" name="length"/>
-				<label onclick="changeLength(12)" class="toggle-label" for="length12">+</label></td>
-				</form>
-			</tr>
-		<table>
+		<p class="btnLink unselectable" data-toggle="modal" data-target="#helpModal">Help</p>
 
-		<p id="enterhints"><br>Enter the hints below</p>
-		<table>
-			<tr>
-				<td id="cell1"><input type="text" placeholder="1" id="input1" oninput="enterHint(this.value)"/></td>
-				<td id="cell2"><input type="text" placeholder="2" id="input2" oninput="enterHint(this.value)"/></td>
-				<td id="cell3"><input type="text" placeholder="3" id="input3" oninput="enterHint(this.value)"/></td>
-				<td id="cell4"><input type="text" placeholder="4" id="input4" oninput="enterHint(this.value)"/></td>
-				<td id="cell5"><input type="text" placeholder="5" id="input5" oninput="enterHint(this.value)"/></td>
-				<td id="cell6"><input type="text" placeholder="6" id="input6" oninput="enterHint(this.value)"/></td>
-				<td id="cell7"><input type="text" placeholder="7" id="input7" oninput="enterHint(this.value)"/></td>
-				<td id="cell8"><input type="text" placeholder="8" id="input8" oninput="enterHint(this.value)"/></td>
-				<td id="cell9"><input type="text" placeholder="9" id="input9" oninput="enterHint(this.value)"/></td>
-				<td id="cell10"><input type="text" placeholder="10" id="input10" oninput="enterHint(this.value)"/></td>
-				<td id="cell11"><input type="text" placeholder="11" id="input11" oninput="enterHint(this.value)"/></td>
-			</tr>
-		</table>
+		<a href="https://docs.google.com/forms/d/1XmS9zlGEHBjO_rTXBxB8fQPWgWP0opWgsAJdjt3xt6s/viewform" target="_blank">
+		<p class="btnLink unselectable">Send Feedback</p></a>
 
-		<br><i><p id="multiplewords"></p></i>
-		<br><b>WORD LIST</b><br>
-		<p id="wordcount"><p>
-		<hr style="width: 300px; border: 1px solid black;">
-		<p id="wordlist"></p>
+		<p class="btnLink unselectable" data-toggle="modal" data-target="#wordListModal">Word List</p>
+
+		<a href="https://github.com/Croutonix/dmtcheat" target="_blank"><p class="btnLink unselectable">Contribute</p></a>
+
+		<p id="title">Draw My Thing Cheat</p>
+
+		<div>
+			<b><p id="lengthLabel" class="lengthLabel unselectable">Choose word length</p></b>
+			<input id="lengthSlider" type="text" data-slider-min="2" data-slider-max="12" data-slider-step="1" data-slider-tooltip="hide">
+			<p id="lengthIndicator" class="lengthLabel unselectable"/>
+		</div>
+
+		<div id="inputDiv">
+			<input type="text" class="form-control inputHint" placeholder="1" id="input1"/>
+			<input type="text" class="form-control inputHint" placeholder="2" id="input2"/>
+			<input type="text" class="form-control inputHint" placeholder="3" id="input3"/>
+			<input type="text" class="form-control inputHint" placeholder="4" id="input4"/>
+			<input type="text" class="form-control inputHint" placeholder="5" id="input5"/>
+			<input type="text" class="form-control inputHint" placeholder="6" id="input6"/>
+			<input type="text" class="form-control inputHint" placeholder="7" id="input7"/>
+			<input type="text" class="form-control inputHint" placeholder="8" id="input8"/>
+			<input type="text" class="form-control inputHint" placeholder="9" id="input9"/>
+			<input type="text" class="form-control inputHint" placeholder="10" id="input10"/>
+			<input type="text" class="form-control inputHint" placeholder="11" id="input11"/>
+		</div>
+		
+		<p id="wordListLabel">Word list</p>
+		<p id="wordCount"/>
+		<hr class="separator">
+		<p id="wordList"/>
+
+		<p id="showAllBtn" class="unselectable"/>
+
+		<div id="wordListModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+			    	<div class="modal-header">
+			    		<button type="button" class="close" data-dismiss="modal">&times;</button>
+			    		<h4 class="modal-title" id="listWordCount"/>
+			    	</div>
+			    	<div class="modal-body">
+			    		<div id="listWordListDiv"><p id="listWordList"/></div>
+			    	</div>
+			    </div>
+			</div>
+		</div>
 		</center>
 
-		<script>
-			var default_length = 5
-			var wordLength = default_length
-			var wordList = []
+		<div id="helpModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+			    	<div class="modal-header">
+			    		<button type="button" class="close" data-dismiss="modal">&times;</button>
+			    		<h4 class="modal-title" id="listWordCount">How to use this cheat <b>efficiently</b></h4>
+			    	</div>
+			    	<div class="modal-body">
+			    		<ul style="list-style-type: none; margin: 0px 0px;">
+							<li><b>1.</b> Select the length of the word you need to guess with the buttons</li>
+							<li><b>2.</b> Enter the hints in the textboxes as they appear in the game</li>
+							<li><b>3.</b> Words that match the hints and word length will appear in the word list</li>
+							<li><b>4.</b> Try all the words in the list and you'll end up guessing what it is</li>
+							<li><b>5.</b> If you need to guess multiple words, click on the + button then find</li>
+							<li>the word in the word list (giving hints would have been slower in this case)</li>
+							<li><b>6.</b> Not all the words in the game are known, so the word might not be in the list
+						</ul>
 
-			function enterHint(val) {
-				val = val.replace(/[^a-zA-Z]/g, '').toUpperCase();    // Remove all non alphabetic characters
-				val = val.charAt(val.length-1);                       // Use last input
-				document.getElementById(event.target.id).value = val; // Replace the value in the input
+						<center>
+						<br><b>You can place the browser and Minecraft windows like this</b>
+						<img src="./example.png" width="80%" style="border: 1px solid black;">
+						</center>
+			    	</div>
+			    </div>
+			</div>
+		</div>
 
-				findWords(); // Find possible words
-			}
-
-			function changeLength(len) {
-				// Show the correct amount of textboxes
-				wordLength = len
-				if (wordLength == 12) {wordLength = 0}  // Only word list will be displayed
-				for (i = 1; i < 12; i++) {
-					if (i <= wordLength) {
-						document.getElementById("cell" + i).style.display = "inline-block"; // Show it
-					} else {
-						document.getElementById("cell" + i).style.display = "none";  // Hide it
-					}
-					document.getElementById("input" + i).value = "";
-				}	
-
-				if (wordLength == 0) {wordLength = 12}
-				findWords();  // Show all word with that length
-			}
-
-			function loadWords() {
-				var fileName = "./word_list.txt"
-			    var rawFile = new XMLHttpRequest();
-			    rawFile.open("GET", fileName, false);
-			    rawFile.onreadystatechange = function () {
-		        	if(rawFile.readyState === 4)
-		        	{
-		            	if(rawFile.status === 200 || rawFile.status == 0)
-		            	{
-		            	    var fileContent = rawFile.responseText;
-		             	    wordList = fileContent.split(",");
-		            	    document.getElementById("wordlist").innerHTML =  fileContent;
-		           		}
-		        	}
-		    	}
-		    	rawFile.send(null);
-			}		
-
-			function findWords() {
-				var wordsFound = []
-				for (i = 0; i < wordList.length; i++) {
-					if (wordList[i].length == wordLength || wordLength == 12) {
-						if ((wordLength != 12 && wordList[i].search(" ") == -1) || (wordLength == 12 && wordList[i].search(" ") != -1)) {
-							var ok = true;
-							if (wordLength != 12) {
-								for (j = 0; j < wordLength; j++) {
-									var letter = document.getElementById("input" + (j+1)).value;
-									if (wordList[i].charAt(j).toUpperCase() != letter && letter != "") {
-										ok = false;
-										break;
-									}
-								}
-							}
-							if (ok) {wordsFound.push(wordList[i])}
-						}
-					}
-				}
-
-				var list = wordsFound.toString().replace(/,/g, "<br>");  // Convert array to text list
-				document.getElementById("wordlist").innerHTML = list;  // Print the words
-
-				var count = wordsFound.length + " words were found out of " + wordList.length;      // 2+ words found
-				if (wordsFound.length == 1) {count = "1 word was found out of " + wordList.length}  // 1 word found
-				if (wordsFound.length == 0) {count = "No word was found out of " + wordList.length} // No word found
-				document.getElementById("wordcount").innerHTML = count;
-
-				if (wordLength == 12) {
-					document.getElementById("multiplewords").innerHTML =  "Find the word in the word list below";
-					document.getElementById("enterhints").style.display = "none";
-				} else {
-					document.getElementById("multiplewords").innerHTML = "";
-					document.getElementById("enterhints").style.display = "inline";
-				}
-			}
-
-			changeLength(default_length); // Set default length to 6
-			loadWords(); // Load words from file
-			findWords(); // Show the word with 6 letters
-		</script>
+		<script type="text/javascript" src="dmtcheat.js"></script>
 	</body>
 </html>

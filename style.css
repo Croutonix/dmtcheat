@@ -1,0 +1,91 @@
+body {
+	padding-top: 30px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.inputHint {
+	width: 35px;
+	height: 35px;
+	margin-top: 0 auto;
+	margin-bottom: 0 auto;
+	text-align: center;
+	padding: 0px !important;
+	display: inline-block;
+	transition: opacity 500ms;
+}
+.inputHint:disabled {
+	background-color: transparent;
+	opacity: 0.2;
+	cursor: default;
+	transition: opacity 500ms;
+}
+.lengthLabel {
+	padding: 10px;
+	display: inline-block;
+}
+.btnLink {
+	display: inline-block;
+	padding: 10px;
+	margin: 5px;
+	background-color: #F9F9F9;
+	border-radius: 5px;
+	color: #777777;
+	font-weight: bold;
+	transition: ease 200ms;
+}
+.btnLink:hover {
+	background-color: #5599FF;
+	color: #FFFFFF;
+	transition: ease 300ms;
+	cursor: pointer;
+}
+#inputDiv {
+	height: 50px;
+}
+#wordListLabel {
+	margin: 0;
+	margin-top: 20px;
+	font-size: 15pt;
+	font-weight: bold;
+	font-variant-caps: small-caps;
+}
+#showAllBtn {
+	display: inline-block;
+	padding: 5px;
+	border-radius: 5px;
+	border: 2px solid #DDD;
+	font-variant-caps: small-caps;
+	font-weight: bold;
+	cursor: pointer;
+	transition: ease 300ms;
+}
+#showAllBtn:hover {
+	background-color: #DDDDDD;
+	transition: ease 300ms;
+}
+.unselectable {
+	-webkit-user-select: none;      
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+.separator {
+	width: 350px;
+	border: 1px solid #DDD;
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+#title {
+	font-size: 30pt;
+	font-weight: bolder;
+	font: Impact;
+
+}
+#listWordListDiv {
+	column-count: 4;
+	-webkit-column-count: 4;
+	-moz-column-count: 4;
+	column-width: 100px;
+	-webkit-column-width: 100px;
+	-moz-column-width: 100px;
+}
