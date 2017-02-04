@@ -13,4 +13,4 @@ You can contribute to this project mostly by adding words to the _wordlist.txt_ 
 
 Also, if you could share this with your friends and with other players on Mineplex, I would be really glad! This way it will spread faster, more words will be discovered, making it more reliable.
 
-Note that you can use any of this code for any purpose, including selling it. Good luck with the last point though.
+Note that you can use any of this code for any purpose, including selling it. Good luck with the last point though. I would like you to give me credit though.
