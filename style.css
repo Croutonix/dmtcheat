@@ -48,8 +48,8 @@ body {
 	font-weight: bold;
 	font-variant-caps: small-caps;
 }
-#showAllBtn {
-	display: inline-block;
+.actionBtn {
+	margin-top: 5px;
 	padding: 5px;
 	border-radius: 5px;
 	border: 2px solid #DDD;
@@ -58,7 +58,7 @@ body {
 	cursor: pointer;
 	transition: ease 300ms;
 }
-#showAllBtn:hover {
+.actionBtn:hover {
 	background-color: #DDDDDD;
 	transition: ease 300ms;
 }
@@ -88,4 +88,18 @@ body {
 	column-width: 100px;
 	-webkit-column-width: 100px;
 	-moz-column-width: 100px;
+}
+.foundWord {
+	margin: 0;
+	padding: 0;
+	padding-left: 100px;
+	padding-right: 100px;
+	cursor: pointer;
+}
+.foundWord:hover {
+	font-weight: bold;
+}
+.foundWordCopied {
+	cursor: default !important;
+	color: #AAA;
 }

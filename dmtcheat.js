@@ -1,9 +1,15 @@
-var currentCell = -1;
-var defaultLength = 5;
-var wordLength = defaultLength;
-var wordList = [];
-var wordsFound = [];
+var MAX_SHOWN = 15;
+var DEFAULT_LENGTH = 5;
 
+var LIST_FILE = "wordlist.txt";
+
+var currentCell = -1;
+var wordLength;
+var wordList = [];
+var wordsFound;
+var allShown = false;
+
+// FIND ALL INPUTS
 var inputs = [];
 var inputEvent = function(event) {
         var input = event.target;
@@ -13,7 +19,6 @@ var inputEvent = function(event) {
         input.value = val;
         findWords();
 };
-
 for (i = 1; i <= 11; i++) {
     inputs[i] = document.getElementById("input" + i);
     inputs[i].number = i;
@@ -34,16 +39,35 @@ for (i = 1; i <= 11; i++) {
     });
 }
 
+// LENGTH SLIDER
 var lengthSlider = new Slider("#lengthSlider", {}).on("change", function(len) {
     changeLength(len.newValue);
 });
 var lengthIndicator = document.getElementById("lengthIndicator");
 
+// SHOW ALL BUTTON
 var showAllBtn = document.getElementById("showAllBtn");
 showAllBtn.addEventListener("click", function(event) {
-    document.getElementById("wordList").innerHTML = wordsFound.join("<br>");
+	if (allShown) return;
+	allShown = true;
+	for (i = MAX_SHOWN; i < wordsFound.length; i++) {
+    	document.getElementById("wordList").innerHTML += '<p class="foundWord" title="Click to copy to clipboard" onclick="copyWord(this, ' + i.toString() + ')">' + wordsFound[i] + '</p>';
+    }
     showAllBtn.style.display = "none";
 })
+
+// RESET COPIED WORDS BUTTON
+var resetBtn = document.getElementById("resetBtn");
+resetBtn.addEventListener("click", function(event) {
+	var len = allShown ? wordsFound.length : Math.min(wordsFound.length, MAX_SHOWN);
+	var words = "";
+    for (i = 0; i < len; i++) {
+    	words += '<p class="foundWord" title="Click to copy to clipboard" onclick="copyWord(this, ' + i.toString() + ')">' + wordsFound[i] + '</p>';
+    }
+    document.getElementById("wordList").innerHTML = words;
+    resetBtn.style.display = "none";
+})
+
 
 function changeCurrentCell(dir) {
     currentCell += dir;
@@ -51,6 +75,7 @@ function changeCurrentCell(dir) {
     if (currentCell === wordLength + 1) currentCell = 1;
     inputs[currentCell].focus();
 }
+
 
 function changeLength(len) {
     if (len < 12) lengthIndicator.innerHTML = len + " letters";
@@ -68,10 +93,10 @@ function changeLength(len) {
     findWords();  // Show all word with that length
 }
 
+
 function loadWords() {
-    var file = "./wordlist.txt";
     var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
+    rawFile.open("GET", LIST_FILE, false);
     rawFile.onreadystatechange = function() {
         if (rawFile.readyState === 4) {
             if (rawFile.status === 200 || rawFile.status === 0) {
@@ -86,7 +111,9 @@ function loadWords() {
     document.getElementById("listWordList").innerHTML = wordList.join("<br>");
 }        
 
+
 function findWords() {
+	// Find the matching words
     wordsFound = [];
     for (i = 0; i < wordList.length; i++) {
         if (wordList[i].length == wordLength || wordLength == 12) {
@@ -106,15 +133,20 @@ function findWords() {
         }
     }
 
-    var wordsPreview = wordsFound.slice(0, 15);
-    if (wordsFound.length > 15) {
+    allShown = false;
+    if (wordsFound.length > MAX_SHOWN) {
         showAllBtn.style.display = "inline-block";
-        showAllBtn.innerHTML = "Show " + (wordsFound.length - 15) + " more"
+        showAllBtn.innerHTML = "Show " + (wordsFound.length - MAX_SHOWN) + " more"
     } else {
         showAllBtn.style.display = "none";
     }
+    resetBtn.style.display = "none";
     
-    document.getElementById("wordList").innerHTML = wordsPreview.join("<br>");  // Print the words
+    var words = "";
+    for (i = 0; i < Math.min(wordsFound.length, MAX_SHOWN); i++) {
+    	words += '<p class="foundWord" title="Click to copy to clipboard" onclick="copyWord(this, ' + i + ')">' + wordsFound[i] + '</p>';
+    }
+    document.getElementById("wordList").innerHTML = words;
 
     var count = wordsFound.length + " words were";
     if (wordsFound.length === 1) count = "1 word was";
@@ -123,6 +155,37 @@ function findWords() {
     document.getElementById("wordCount").innerHTML = count;
 }
 
-changeLength(defaultLength);
+
+function copyWord(element, index) {
+	element.className += " foundWordCopied";
+	copyToClipboard(wordsFound[index]);
+	resetBtn.style.display = "inline-block";
+}
+
+
+function copyToClipboard(text) {
+    if (window.clipboardData && window.clipboardData.setData) {
+        // IE specific code path to prevent textarea being shown while dialog is visible.
+        return clipboardData.setData("Text", text); 
+
+    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+        var textarea = document.createElement("textarea");
+        textarea.textContent = text;
+        textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+        } catch (ex) {
+            console.warn("Copy to clipboard failed", ex);
+            return false;
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+
+
+changeLength(DEFAULT_LENGTH);
 loadWords();
 findWords();
