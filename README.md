@@ -1,10 +1,11 @@
 # Draw My Thing Cheat
-You can use this tool from https://github.com/Croutonix/dmtcheat. The goal of this project is to provide an easy way to get pretty good at Draw my thing, on the Mineplex server. Legitimately. Hmmm... totally.
+You can use this tool from https://github.com/Croutonix/dmtcheat. The goal of this project is to provide an easy way to get pretty good at Draw my thing, on the Mineplex server. Legitimately. Kinda.
 
 # Newly added features
+- Click on the word to copy it to clipboard.
 - Support for most modern browsers: Firefox, Chrome, Safari, Edge, IE...
 - Changed UI to look smoother: modals instead of different page for help and word list, slider instead of length buttons, etc. I decided to use Bootstrap because it's a quick an easy way to make thing look good.
-- You can now navigate between hint inputs with the arrows, and delete the letter with the cursor at any position with the DEL or backspace keys.
+- Navigation between hint inputs with the arrows, and delete the letter with the cursor at any position with the DEL or backspace keys.
 - Added a _Show more_ button instead of showing all the words found. Only the 15 first are displayed.
 - Word list is now automatically sorted in alphabetical order. This is better because you don't have to order when adding words.
 
