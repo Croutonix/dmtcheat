@@ -106,6 +106,7 @@ function loadWords() {
         }
     };
     rawFile.send(null);
+    wordList.splice(-1, 1);  // Remove last empty item because there's a comma at the end
 
     document.getElementById("listWordCount").innerHTML = "Complete known words list - <b>" + wordList.length + " words</b>"
     document.getElementById("listWordList").innerHTML = wordList.join("<br>");
