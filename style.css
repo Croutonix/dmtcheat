@@ -1,29 +1,33 @@
+#setting-panel {
+	margin-left: auto;
+	margin-right: auto;
+	width: 450px;
+}
+
 body {
-	padding-top: 30px;
-	padding-bottom: 30px;
+	margin: 0;
 	font-family: Arial, Helvetica, sans-serif;
 }
-.inputHint {
-	width: 35px;
-	height: 35px;
-	margin-top: 0 auto;
-	margin-bottom: 0 auto;
+
+.center-div {
+	padding-top: 10px;
 	text-align: center;
-	padding: 0px !important;
-	display: inline-block;
-	transition: opacity 500ms;
 }
-.inputHint:disabled {
-	background-color: transparent;
-	opacity: 0.2;
-	cursor: default;
-	transition: opacity 500ms;
+.left-div {
+	padding-top: 10px;
 }
-.lengthLabel {
-	padding: 10px;
-	display: inline-block;
+
+#title {
+	font-weight: bold;
+	font-size: 40px;
+	margin-bottom: 10px;
+	margin-top: 10px;
 }
-.btnLink {
+
+#link-div {
+	margin-top: 10px;
+}
+.link-btn {
 	display: inline-block;
 	padding: 10px;
 	margin: 5px;
@@ -33,74 +37,203 @@ body {
 	font-weight: bold;
 	transition: ease 200ms;
 }
-.btnLink:hover {
-	background-color: #5599FF;
+.link-btn:hover {
+	background-color: #5577CC;
 	color: #FFFFFF;
 	transition: ease 300ms;
 	cursor: pointer;
 }
-#inputDiv {
-	height: 50px;
-}
-#wordListLabel {
-	margin: 0;
-	margin-top: 20px;
-	font-size: 15pt;
-	font-weight: bold;
-	font-variant-caps: small-caps;
-}
-.actionBtn {
-	margin-top: 5px;
-	padding: 5px;
-	border-radius: 5px;
-	border: 2px solid #DDD;
-	font-variant-caps: small-caps;
-	font-weight: bold;
-	cursor: pointer;
-	transition: ease 300ms;
-}
-.actionBtn:hover {
-	background-color: #DDDDDD;
-	transition: ease 300ms;
-}
-.unselectable {
-	-webkit-user-select: none;      
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
-	user-select: none;
-}
-.separator {
-	width: 350px;
-	border: 1px solid #DDD;
-	margin-top: 0;
-	margin-bottom: 10px;
-}
-#title {
-	font-size: 30pt;
-	font-weight: bolder;
-	font: Impact;
 
+.setting-label {
+	font-weight: bold;
+	display: inline;
+	padding-right: 10px;
 }
-#listWordListDiv {
+
+.dropdown {
+	font-size: 16px;
+	margin-bottom: 10px;
+	padding: 3px;
+}
+
+.input-choice-radio {
+	display: inline;
+}
+.input-choice-label {
+	display: inline;
+	padding-right: 10px;
+}
+
+.word-length-label {
+	display: inline;
+	padding-right: 5px;
+}
+
+.word-length-input {
+	font-size: 16px;
+	display: inline;
+	padding: 5px;
+	margin-right: 15px;
+	margin-top: 5px;
+}
+.input-narrow {
+	width: 50px;
+}
+.input-large {
+	width: 100px;
+}
+
+#hint-div {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	margin-top: 20px;
+}
+.input-hint {
+	display: inline;
+	font-size: 20px;
+	width: 30px;
+	border: 0;
+	border-bottom: 2px solid #AAA;
+	text-align: center;
+	margin: 5px;
+	border-radius: 3px;
+}
+.input-hint:hover {
+	border-bottom: 2px solid #777;
+}
+.input-hint:focus {
+	outline: none;
+	border-bottom: 2px solid #333;
+}
+
+#word-found-title {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 0;
+}
+#word-found-label {
+	font-size: 14px;
+	font-weight: bold;
+	margin: 0;
+	display: inline;
+}
+#word-found-label-div {
+	vertical-align: middle;
+}
+.word-found-label-sep {
+	display: inline-block;
+	width: 100px;
+	height: 1px;
+	background-color: #000;
+	margin: 5px 10px 5px 10px;
+}
+.word-found-list {
+	width: 200px;
+	font-size: 15px;
+	display: inline-block;
+	margin-top: 10px;
+	margin-left: 5px;
+	margin-right: 5px;
+	vertical-align: top;
+}
+.word-found {
+	margin: 0;
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 40px;
+	padding-right: 40px;
+	cursor: pointer;
+	display: block;
+}
+.word-found:hover {
+	font-weight: bold;
+}
+.word-found-copied {
+	cursor: default !important;
+	color: #AAA;
+}
+.word-found-btn {
+	font-size: 15px;
+	background-color: #FFF;
+	color: #444;
+	border: 1px solid #666;
+	padding: 5px 10px 5px 10px;
+	border-radius: 3px;
+	margin: 5px;
+}
+.word-found-btn:hover {
+	color: #000;
+	border: 1px solid #222;
+}
+.word-found-btn:active {
+	transform: translateY(2px);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #000;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+    margin: 100px auto;
+    border: 1px solid #888;
+    width: auto;
+    max-width: 650px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+}
+.modal-header {
+	background-color: #F9F9F9;
+	padding: 15px;
+	text-align: center;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom: 1px solid #CCC;
+}
+.modal-body {
+	background-color: #FEFEFE;
+	padding: 20px;
+	padding-right: 50px;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.modal-title {
+	font-size: 18px;
+	margin: 0;
+}
+.modal-close {
+    color: #AAA;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: -5px;
+    margin-right: 2px;
+    transition: ease 150ms;
+}
+.modal-close:hover,
+.modal-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    transition: ease 150ms;
+}
+
+#word-list-modal-list {
+	font-size: 16px;
+	margin: 0;
+	text-align: center;
 	column-count: 4;
 	-webkit-column-count: 4;
 	-moz-column-count: 4;
 	column-width: 100px;
 	-webkit-column-width: 100px;
 	-moz-column-width: 100px;
-}
-.foundWord {
-	margin: 0;
-	padding: 0;
-	padding-left: 100px;
-	padding-right: 100px;
-	cursor: pointer;
-}
-.foundWord:hover {
-	font-weight: bold;
-}
-.foundWordCopied {
-	cursor: default !important;
-	color: #AAA;
 }
