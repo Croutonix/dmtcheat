@@ -3,7 +3,7 @@ You can use this tool from https://github.com/Croutonix/dmtcheat. The goal of th
 
 # Newly added features
 - Complete rewrite of the tool including new UI
-- Multi-server support
+- Multi-server support: I added The Hive server, but the word list still needs a lot of work, feel free to help! You can suggest me new servers but you must provide the word list.
 - Ability to search for more than one word
 
 # Contribute
