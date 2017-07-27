@@ -3,10 +3,15 @@ const SERVERS = [
 		name: "Mineplex", 
 		game: "Draw My Thing",
 		wordList: "./wordlist-mineplex.txt",
-		maxWordCount: 3,
+		maxWordCount: 3,  // Maximum number of words
 		defaultWordCount: 1,
-		minWordLength: [[2], [3, 3], [3, 2, 4]],
-		maxWordLength: [[11], [9, 6], [4, 3, 7]],
+		//              1wd  2words  3words
+		minWordLength: [[2], [3, 3], [3, 2, 4]],  // Here if the user selects 3 words for example, then the minimum of the 
+		                                          // first word is 3 letters, 2 letters for the second and 4 for the third
+		maxWordLength: [[11], [9, 6], [4, 3, 7]], // Same thing with maximum
+		                                          // There doesn't have to be a guess that matches the extremums:
+		                                          // ex: There might not be a guess that has 2 words with 3 letters each but there might be two
+		                                          // guesses like that: big feet, round pig. In this case, 3 letters is possible for both words
 		defaultWordLength: [[5], [5, 4], [3, 2, 4]],
 	},
 	{
@@ -18,7 +23,8 @@ const SERVERS = [
 		minWordLength: [[3], [3, 3]],
 		maxWordLength: [[12], [6, 7]],
 		defaultWordLength: [[5], [5, 5]],
-	}
+	},
+	// You can add more servers if you want, they will appear in the list automatically
 ]
 
 const DEFAULT_SERVER_INDEX = 0;
