@@ -153,6 +153,8 @@ function onWordLengthChanged() {
 	}
 
 	findWords();  // Find words matching new length
+	var x = document.getElementById("resetletters");
+	x.style.display = 'none';
 }
 
 /**
