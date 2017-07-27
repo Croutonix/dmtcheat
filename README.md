@@ -5,9 +5,10 @@ You can use this tool from http://croutonix.github.io/dmtcheat/. The goal of thi
 - Complete rewrite of the tool including new UI
 - Multi-server support: I added The Hive server, but the word list still needs a lot of work, feel free to help! You can suggest me new servers but you must provide the word list.
 - Ability to search for more than one word
+- Ability to Reset Input
 
 # Contribute
-You can contribute to this project mostly by adding words to the _wordlist-xxxx.txt_ files if you notice any are missing. Don't forget to separe each with a comma except after the last word. No need to add them in alphabetical order.
+You can contribute to this project mostly by adding words to the _wordlist-xxxx.txt_ files if you notice any are missing. Don't forget to separate each with a comma except after the last word. No need to add them in alphabetical order.
 
 Also, if you could share this with your friends and with other players, I would be really glad! This way it will spread faster, more words will be discovered, making it more reliable.
 

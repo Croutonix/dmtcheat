@@ -1,12 +1,12 @@
 const SERVERS = [
 	{
-		name: "Mineplex", 
+		name: "Mineplex",
 		game: "Draw My Thing",
 		wordList: "./wordlist-mineplex.txt",
 		maxWordCount: 3,  // Maximum number of words
 		defaultWordCount: 1,
 		//              1wd  2words  3words
-		minWordLength: [[2], [3, 3], [3, 2, 4]],  // Here if the user selects 3 words for example, then the minimum of the 
+		minWordLength: [[2], [3, 3], [3, 2, 4]],  // Here if the user selects 3 words for example, then the minimum of the
 		                                          // first word is 3 letters, 2 letters for the second and 4 for the third
 		maxWordLength: [[11], [9, 6], [4, 3, 7]], // Same thing with maximum
 		                                          // There doesn't have to be a guess that matches the extremums:
@@ -15,7 +15,7 @@ const SERVERS = [
 		defaultWordLength: [[5], [5, 4], [3, 2, 4]],
 	},
 	{
-		name: "Hive", 
+		name: "Hive",
 		game: "Draw It",
 		wordList: "./wordlist-hive.txt",
 		maxWordCount: 2,
@@ -59,6 +59,7 @@ var resetCopyBtn;
 	@param server Server object
 */
 function onServerSelected(server) {
+
 	selectedServer = server;
 	currentHint = 0;
 
@@ -102,6 +103,7 @@ function onServerSelected(server) {
 	@param count Between 0 and 2 depending on the server (1-3)
 */
 function onWordCountChanged(count) {
+
 	wordLength = selectedServer.defaultWordLength[count-1];
 	for (var i = 0; i < (count == 1 ? 1 : count+1); i++) {
 		var word = (i <= 1 ? 0 : i-1);
@@ -169,6 +171,10 @@ function changeCurrentHint(dir) {
 */
 function findWords() {
 	// Create template matching the hints -> dr_w _y th_ng
+	var x = document.getElementById('resetletters');
+	x.style.display = 'block';
+
+
 	var template = "";
 	var spaces = spaceIndexes.slice(0);
 	for (var i = 0; i < rawWordLength; i++) {
@@ -197,7 +203,7 @@ function findWords() {
 			if (match) matchWords.push(word);
 		}
 	}
-	
+
 	// Update word list
 	var found = matchWords.length;
 	if (found == 0) {
@@ -212,7 +218,7 @@ function findWords() {
 		document.getElementById("word-found-label-div").style.display = "block";
 		document.getElementById("word-found-label").innerHTML = found + " matches found";
 	}
-	
+
 	showFoundWords(false);
 
 	// Show Show more words button if needed
@@ -270,7 +276,7 @@ function showFoundWords(showAll) {
 function copyToClipboard(text) {
     if (window.clipboardData && window.clipboardData.setData) {
         // IE specific code path to prevent textarea being shown while dialog is visible.
-        return clipboardData.setData("Text", text); 
+        return clipboardData.setData("Text", text);
 
     } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
         var textarea = document.createElement("textarea");
@@ -441,6 +447,34 @@ function main() {
 	// Select default settings
 	serverDropdown.selectedIndex = DEFAULT_SERVER_INDEX;
 	onServerSelected(selectedServer);
+}
+
+function resetWords() {
+	// Adjust hint inputs to match words lengths
+	rawWordLength = 0;
+	spaceIndexes = [];
+	for (var i = 0; i < wordCount; i++) {
+		rawWordLength += wordLength[i];
+		if (wordCount != 1 && i < wordCount-1) spaceIndexes.push(rawWordLength);
+	}
+	var spaces = spaceIndexes.slice(0);
+	for (var i = 0; i < MAXIMUM_POSSIBLE_LENGTH; i++) {
+		hintInput[i].style.display = (i < rawWordLength ? "inline" : "none");
+		hintInput[i].value = "";
+		if (spaces.length > 0 && i == spaces[0]) {
+			// Add left margin to add space between words
+			hintInput[i].style.marginLeft = HINT_SPACE_WIDTH;
+			spaces.shift();
+		} else {
+			hintInput[i].style.marginLeft = "5px";  // Reset margin
+		}
+	}
+
+	findWords();  // Find words matching new length
+	var x = document.getElementById('resetletters');
+			if (x.style.display === 'block') {
+					x.style.display = 'none';
+			}
 }
 
 main();

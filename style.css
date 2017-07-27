@@ -83,6 +83,11 @@ body {
 	width: 100px;
 }
 
+#resetletters {
+    margin:0 auto;
+    display:block;
+}
+
 #hint-div {
 	margin-left: auto;
 	margin-right: auto;

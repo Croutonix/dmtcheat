@@ -43,7 +43,8 @@
 				<label id="word-length-label-3" class="word-length-label">Third:<input class="word-length-input input-narrow" type="number" name="word-length"></label>
 			</div>
 		</div>
-		<div id="hint-div"></div>
+		<div id="hint-div"></div><br/>
+		<button id="resetletters" class="word-found-btn" onclick="resetWords()">Reset Input</button>
 		<div class="center-div">
 			<p id="word-found-title"></p>
 			<div id="word-found-label-div">
@@ -96,4 +97,8 @@
 	</body>
 
 	<script type="text/javascript" src="./dmtcheat.js"></script>
+	<script>
+	var x = document.getElementById("resetletters");
+	x.style.display = 'none';
+	</script>
 </html>
