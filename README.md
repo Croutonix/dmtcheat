@@ -1,5 +1,5 @@
 # Draw My Thing Cheat
-You can use this tool from https://github.com/Croutonix/dmtcheat. The goal of this project is to provide an easy way to get pretty good at Draw my thing or similar games on Mineplex or The Hive.
+You can use this tool from http://croutonix.github.io/dmtcheat/. The goal of this project is to provide an easy way to get pretty good at Draw my thing or similar games on Mineplex or The Hive.
 
 # Newly added features
 - Complete rewrite of the tool including new UI
