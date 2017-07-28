@@ -53,6 +53,7 @@ var listLeftColumn;
 var listRightColumn
 var showAllBtn;
 var resetCopyBtn;
+var toggleclearinput = document.getElementById("clearinput");
 
 /**
 	Called when a server is selected
@@ -153,8 +154,8 @@ function onWordLengthChanged() {
 	}
 
 	findWords();  // Find words matching new length
-	var x = document.getElementById("resetletters");
-	x.style.display = 'none';
+	toggleclearinput.style.visibility = 'hidden';
+
 }
 
 /**
@@ -173,8 +174,7 @@ function changeCurrentHint(dir) {
 */
 function findWords() {
 	// Create template matching the hints -> dr_w _y th_ng
-	var x = document.getElementById('resetletters');
-	x.style.display = 'block';
+	toggleclearinput.style.visibility = 'visible';
 
 
 	var template = "";
@@ -298,6 +298,10 @@ function copyToClipboard(text) {
 }
 
 function main() {
+
+  // Hide Clear Input on Start-up
+	toggleclearinput.style.visibility = 'hidden';
+
 	// Server dropdown, add servers to list
 	var serverDropdown = document.getElementById("server-dropdown");
 	for (var i = 0; i < SERVERS.length; i++) {
@@ -451,32 +455,9 @@ function main() {
 	onServerSelected(selectedServer);
 }
 
-function resetWords() {
-	// Adjust hint inputs to match words lengths
-	rawWordLength = 0;
-	spaceIndexes = [];
-	for (var i = 0; i < wordCount; i++) {
-		rawWordLength += wordLength[i];
-		if (wordCount != 1 && i < wordCount-1) spaceIndexes.push(rawWordLength);
-	}
-	var spaces = spaceIndexes.slice(0);
-	for (var i = 0; i < MAXIMUM_POSSIBLE_LENGTH; i++) {
-		hintInput[i].style.display = (i < rawWordLength ? "inline" : "none");
-		hintInput[i].value = "";
-		if (spaces.length > 0 && i == spaces[0]) {
-			// Add left margin to add space between words
-			hintInput[i].style.marginLeft = HINT_SPACE_WIDTH;
-			spaces.shift();
-		} else {
-			hintInput[i].style.marginLeft = "5px";  // Reset margin
-		}
-	}
-
-	findWords();  // Find words matching new length
-	var x = document.getElementById('resetletters');
-			if (x.style.display === 'block') {
-					x.style.display = 'none';
-			}
+function clearInput() {
+	onWordLengthChanged();
+	toggleclearinput.style.visibility = 'hidden';
 }
 
 main();

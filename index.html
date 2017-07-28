@@ -44,7 +44,7 @@
 			</div>
 		</div>
 		<div id="hint-div"></div><br/>
-		<button id="resetletters" class="word-found-btn" onclick="resetWords()">Reset Input</button>
+		<button id="clearinput" class="word-found-btn" onclick="clearInput()">Clear Input</button>
 		<div class="center-div">
 			<p id="word-found-title"></p>
 			<div id="word-found-label-div">
@@ -55,7 +55,7 @@
 			<div id="left-word-found" class="word-found-list"></div>
 			<div id="right-word-found" class="word-found-list"></div>
 			<br><button id="show-all-btn" class="word-found-btn" type="button"></button>
-			<br><button id="reset-copy-btn" class="word-found-btn" type="button">Reset copied words</button>
+			<br><button id="reset-copy-btn" class="word-found-btn" type="button">Reset Copied Words</button>
 		</div>
 
 		<!-- Word list modal -->
@@ -97,8 +97,4 @@
 	</body>
 
 	<script type="text/javascript" src="./dmtcheat.js"></script>
-	<script>
-	var x = document.getElementById("resetletters");
-	x.style.display = 'none';
-	</script>
 </html>
