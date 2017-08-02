@@ -53,7 +53,7 @@ var listLeftColumn;
 var listRightColumn
 var showAllBtn;
 var resetCopyBtn;
-var toggleclearinput = document.getElementById("clearinput");
+var clearInputBtn;
 
 /**
 	Called when a server is selected
@@ -153,9 +153,9 @@ function onWordLengthChanged() {
 		}
 	}
 
-	findWords();  // Find words matching new length
-	toggleclearinput.style.visibility = 'hidden';
+	clearInputBtn.style.visibility = "hidden";
 
+	findWords();  // Find words matching new length
 }
 
 /**
@@ -174,20 +174,23 @@ function changeCurrentHint(dir) {
 */
 function findWords() {
 	// Create template matching the hints -> dr_w _y th_ng
-	toggleclearinput.style.visibility = 'visible';
-
-
 	var template = "";
 	var spaces = spaceIndexes.slice(0);
+	var showClear = false
 	for (var i = 0; i < rawWordLength; i++) {
 		if (spaces.length > 0 && i == spaces[0]) {
 			template += " ";
 			spaces.shift();
 		}
 		var val = hintInput[i].value;
-		if (val.length == 0) template += "_";
-		else template += val.toLowerCase();
+		if (val.length == 0) {
+			template += "_";
+		} else {
+			template += val.toLowerCase();
+			showClear = true;
+		}
 	}
+	clearInputBtn.style.visibility = (showClear ? "visible" : "hidden");
 
 	// Find words in list matching template
 	matchWords = [];
@@ -298,10 +301,6 @@ function copyToClipboard(text) {
 }
 
 function main() {
-
-  // Hide Clear Input on Start-up
-	toggleclearinput.style.visibility = 'hidden';
-
 	// Server dropdown, add servers to list
 	var serverDropdown = document.getElementById("server-dropdown");
 	for (var i = 0; i < SERVERS.length; i++) {
@@ -360,7 +359,8 @@ function main() {
 		input.addEventListener("input", function() {
 			this.value = this.value.replace(/[^a-zA-Z]/g, "").toUpperCase();
 			if (this.value.length > 1) this.value = this.value.substring(1);
-			findWords();
+
+			findWords(); // Update word list
 		});
 		input.addEventListener("keydown", function(event) {
 			if (event.keyCode == 37) {  // Left
@@ -417,6 +417,17 @@ function main() {
 		this.style.visibility = "hidden";
 	});
 
+	  // Hide Clear Input on Start-up
+	clearInputBtn = document.getElementById("clear-input-btn");
+	clearInputBtn.style.visibility = "hidden";
+	clearInputBtn.addEventListener("click", function() {
+	    clearInputBtn.style.visibility = "hidden";
+	    for (var i = 0; i < MAXIMUM_POSSIBLE_LENGTH; i++) {
+	    	hintInput[i].value = "";
+	    }
+	    findWords();
+	});
+
 	// Word list modal
 	var wordListModal = document.getElementById("word-list-modal");
 	var wordListBtn = document.getElementById("word-list-btn");
@@ -453,11 +464,6 @@ function main() {
 	// Select default settings
 	serverDropdown.selectedIndex = DEFAULT_SERVER_INDEX;
 	onServerSelected(selectedServer);
-}
-
-function clearInput() {
-	onWordLengthChanged();
-	toggleclearinput.style.visibility = 'hidden';
 }
 
 main();
