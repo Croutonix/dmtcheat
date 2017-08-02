@@ -54,6 +54,7 @@ var listRightColumn
 var showAllBtn;
 var resetCopyBtn;
 var clearInputBtn;
+var missingWordDiv;
 
 /**
 	Called when a server is selected
@@ -213,15 +214,16 @@ function findWords() {
 	var found = matchWords.length;
 	if (found == 0) {
 		document.getElementById("word-found-title").innerHTML = "No matches found";
-		document.getElementById("word-found-label-div").style.display = "none";
+		document.getElementById("word-found-label").innerHTML = "Submit a missing word";
+		missingWordDiv.style.display = "block";
 	} else if (found == 1) {
 		document.getElementById("word-found-title").innerHTML = "Word list";
-		document.getElementById("word-found-label-div").style.display = "block";
 		document.getElementById("word-found-label").innerHTML = "1 match found";
+		missingWordDiv.style.display = "none";
 	} else {
 		document.getElementById("word-found-title").innerHTML = "Word list";
-		document.getElementById("word-found-label-div").style.display = "block";
 		document.getElementById("word-found-label").innerHTML = found + " matches found";
+		missingWordDiv.style.display = "none";
 	}
 
 	showFoundWords(false);
@@ -260,10 +262,14 @@ function showFoundWords(showAll) {
 	while (listLeftColumn.hasChildNodes()) listLeftColumn.removeChild(listLeftColumn.lastChild);
 	while (listRightColumn.hasChildNodes()) listRightColumn.removeChild(listRightColumn.lastChild);
 
-	if (found < SPLIT_WORDS_COLUMN_AT) {
+	if (found == 0) {
+		listLeftColumn.style.display = "none";
+		listRightColumn.style.display = "none";
+	} else if (found < SPLIT_WORDS_COLUMN_AT) {
 		for (i = 0; i < found; i++) {
 			addWordToList(listLeftColumn, i);
 		}
+		listLeftColumn.style.display = "inline-block";
 		listRightColumn.style.display = "none";
 	} else {
 		var all = (showAll ? found : Math.min(found, MAX_WORDS_SHOWN));
@@ -274,6 +280,7 @@ function showFoundWords(showAll) {
 		for (i = half; i < all; i++) {
 			addWordToList(listRightColumn, i);
 		}
+		listLeftColumn.style.display = "inline-block";
 		listRightColumn.style.display = "inline-block";
 	}
 }
@@ -385,7 +392,7 @@ function main() {
 	listLeftColumn = document.getElementById("left-word-found");
 	listRightColumn = document.getElementById("right-word-found");
 
-	// Buttons
+	// Show all word button
 	showAllBtn = document.getElementById("show-all-btn");
 	showAllBtn.addEventListener("click", function () {
 		if (!allWordsShown) {
@@ -405,6 +412,8 @@ function main() {
 			this.style.visibility = "hidden";
 		}
 	});
+
+	// Reset copied words button
 	resetCopyBtn = document.getElementById("reset-copy-btn");
 	resetCopyBtn.addEventListener("click", function () {
 		for (var i = 0; i < listLeftColumn.children.length; i++) {
@@ -417,7 +426,7 @@ function main() {
 		this.style.visibility = "hidden";
 	});
 
-	  // Hide Clear Input on Start-up
+	// Clear input button
 	clearInputBtn = document.getElementById("clear-input-btn");
 	clearInputBtn.style.visibility = "hidden";
 	clearInputBtn.addEventListener("click", function() {
@@ -427,6 +436,10 @@ function main() {
 	    }
 	    findWords();
 	});
+
+	// Missing word button
+	missingWordDiv = document.getElementById("missing-word-div");
+	missingWordDiv.style.display = "none";
 
 	// Word list modal
 	var wordListModal = document.getElementById("word-list-modal");
@@ -452,8 +465,8 @@ function main() {
 	    helpModal.style.display = "none";
 	});
 
-	// Add event to close modals when clicked outside
 	window.addEventListener("click", function(event) {
+		// Close modals when clicked outside
 	    if (event.target == wordListModal) {
 	        wordListModal.style.display = "none";
 	    } else if (event.target == helpModal) {

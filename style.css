@@ -111,7 +111,7 @@ body {
 	font-size: 20px;
 	font-weight: bold;
 	margin-bottom: 0;
-	margin-top: 10px;
+	margin-top: 15px;
 }
 #word-found-label {
 	font-size: 14px;
@@ -162,6 +162,7 @@ body {
 	padding: 5px 10px 5px 10px;
 	border-radius: 3px;
 	margin: 5px;
+	cursor: pointer;
 }
 .word-found-btn:hover {
 	color: #000;
@@ -173,6 +174,13 @@ body {
 
 #clear-input-btn {
 	margin-top: 0;
+}
+
+#missing-word-div {
+	margin-top: 10px;
+}
+#missing-word-div a {
+	text-decoration: none;
 }
 
 .modal {
