@@ -21,7 +21,7 @@ const SERVERS = [
 		maxWordCount: 2,
 		defaultWordCount: 1,
 		minWordLength: [[3], [3, 3]],
-		maxWordLength: [[12], [6, 7]],
+		maxWordLength: [[12], [7, 7]],
 		defaultWordLength: [[5], [5, 5]],
 	},
 	// You can add more servers if you want, they will appear in the list automatically
