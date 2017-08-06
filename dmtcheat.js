@@ -5,13 +5,13 @@ const SERVERS = [
 		wordList: "./wordlist-mineplex.txt",
 		maxWordCount: 3,  // Maximum number of words
 		defaultWordCount: 1,
-		//              1wd  2words  3words
+		//			  1wd  2words  3words
 		minWordLength: [[2], [3, 3], [3, 2, 4]],   // Here if the user selects 3 words for example, then the minimum of the
-		                                           // first word is 3 letters, 2 letters for the second and 4 for the third
+												   // first word is 3 letters, 2 letters for the second and 4 for the third
 		maxWordLength: [[11], [11, 6], [4, 3, 7]], // Same thing with maximum
-		                                           // There doesn't have to be a guess that matches the extremums:
-		                                           // ex: There might not be a guess that has 2 words with 3 letters each but there might be two
-		                                           // guesses like that: big feet, round pig. In this case, 3 letters is possible for both words
+												   // There doesn't have to be a guess that matches the extremums:
+												   // ex: There might not be a guess that has 2 words with 3 letters each but there might be two
+												   // guesses like that: big feet, round pig. In this case, 3 letters is possible for both words
 		defaultWordLength: [[5], [5, 4], [3, 2, 4]],
 	},
 	{
@@ -66,16 +66,16 @@ function onServerSelected(server) {
 	currentHint = 0;
 
 	// Load word list for that server
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", server.wordList, false);
-    rawFile.onreadystatechange = function() {
-        if (rawFile.readyState === 4) {
-            if (rawFile.status === 200 || rawFile.status === 0) {
-                wordList = rawFile.responseText.split(",").sort();
-            }
-        }
-    };
-    rawFile.send(null);
+	var rawFile = new XMLHttpRequest();
+	rawFile.open("GET", server.wordList, false);
+	rawFile.onreadystatechange = function() {
+		if (rawFile.readyState === 4) {
+			if (rawFile.status === 200 || rawFile.status === 0) {
+				wordList = rawFile.responseText.split(",").sort();
+			}
+		}
+	};
+	rawFile.send(null);
 
 	document.getElementById("title").innerHTML = server.game + " Cheat";
 
@@ -164,10 +164,10 @@ function onWordLengthChanged() {
 	@param dir Either left (-1) or right (1)
 */
 function changeCurrentHint(dir) {
-    currentHint += dir;
-    if (currentHint < 0) currentHint = rawWordLength-1;
-    if (currentHint >= rawWordLength) currentHint = 0;
-    hintInput[currentHint].focus();
+	currentHint += dir;
+	if (currentHint < 0) currentHint = rawWordLength-1;
+	if (currentHint >= rawWordLength) currentHint = 0;
+	hintInput[currentHint].focus();
 }
 
 /**
@@ -286,25 +286,25 @@ function showFoundWords(showAll) {
 }
 
 function copyToClipboard(text) {
-    if (window.clipboardData && window.clipboardData.setData) {
-        // IE specific code path to prevent textarea being shown while dialog is visible.
-        return clipboardData.setData("Text", text);
+	if (window.clipboardData && window.clipboardData.setData) {
+		// IE specific code path to prevent textarea being shown while dialog is visible.
+		return clipboardData.setData("Text", text);
 
-    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
-        var textarea = document.createElement("textarea");
-        textarea.textContent = text;
-        textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
-        document.body.appendChild(textarea);
-        textarea.select();
-        try {
-            return document.execCommand("copy");  // Security exception may be thrown by some browsers.
-        } catch (ex) {
-            console.warn("Copy to clipboard failed", ex);
-            return false;
-        } finally {
-            document.body.removeChild(textarea);
-        }
-    }
+	} else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+		var textarea = document.createElement("textarea");
+		textarea.textContent = text;
+		textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+		document.body.appendChild(textarea);
+		textarea.select();
+		try {
+			return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+		} catch (ex) {
+			console.warn("Copy to clipboard failed", ex);
+			return false;
+		} finally {
+			document.body.removeChild(textarea);
+		}
+	}
 }
 
 function main() {
@@ -323,11 +323,11 @@ function main() {
 	wordCountRadio = document.querySelectorAll("input[name=word-count]");
 	for (var i = 0; i < 3; i++) {
 		wordCountRadio[i].addEventListener("change", (function(j) {
-	        return function() {
-	        	wordCount = j+1
-	            onWordCountChanged(wordCount);
-	        };
-	    }(i)));
+			return function() {
+				wordCount = j+1
+				onWordCountChanged(wordCount);
+			};
+		}(i)));
 	}
 
 	// Word length spinners
@@ -374,16 +374,16 @@ function main() {
 				changeCurrentHint(-1);
 			} else if (event.keyCode == 39) {  // Right
 				changeCurrentHint(1);
-	        } else if (event.keyCode == 46 || event.keyCode == 8) {  // Delete or Backspace
-	            this.value = "";
-	            findWords();
-	        }
+			} else if (event.keyCode == 46 || event.keyCode == 8) {  // Delete or Backspace
+				this.value = "";
+				findWords();
+			}
 		});
 		(function(j) {
 			input.addEventListener("focus", function(event) {
-	        	currentHint = j;
-	    	});
-	    })(i);
+				currentHint = j;
+			});
+		})(i);
 		hintDiv.appendChild(input);
 		hintInput.push(input);
 	}
@@ -430,11 +430,11 @@ function main() {
 	clearInputBtn = document.getElementById("clear-input-btn");
 	clearInputBtn.style.visibility = "hidden";
 	clearInputBtn.addEventListener("click", function() {
-	    clearInputBtn.style.visibility = "hidden";
-	    for (var i = 0; i < MAXIMUM_POSSIBLE_LENGTH; i++) {
-	    	hintInput[i].value = "";
-	    }
-	    findWords();
+		clearInputBtn.style.visibility = "hidden";
+		for (var i = 0; i < MAXIMUM_POSSIBLE_LENGTH; i++) {
+			hintInput[i].value = "";
+		}
+		findWords();
 	});
 
 	// Missing word button
@@ -447,10 +447,10 @@ function main() {
 	var wordListCloseBtn = document.getElementById("word-list-modal-close");
 
 	wordListBtn.addEventListener("click", function() {
-	    wordListModal.style.display = "block";
+		wordListModal.style.display = "block";
 	});
 	wordListCloseBtn.addEventListener("click", function() {
-	    wordListModal.style.display = "none";
+		wordListModal.style.display = "none";
 	});
 
 	// Help modal
@@ -459,19 +459,19 @@ function main() {
 	var helpCloseBtn = document.getElementById("help-modal-close");
 
 	helpBtn.addEventListener("click", function() {
-	    helpModal.style.display = "block";
+		helpModal.style.display = "block";
 	});
 	helpCloseBtn.addEventListener("click", function() {
-	    helpModal.style.display = "none";
+		helpModal.style.display = "none";
 	});
 
 	window.addEventListener("click", function(event) {
 		// Close modals when clicked outside
-	    if (event.target == wordListModal) {
-	        wordListModal.style.display = "none";
-	    } else if (event.target == helpModal) {
-	    	helpModal.style.display = "none";
-	    }
+		if (event.target == wordListModal) {
+			wordListModal.style.display = "none";
+		} else if (event.target == helpModal) {
+			helpModal.style.display = "none";
+		}
 	});
 
 	// Select default settings
