@@ -28,7 +28,7 @@ const SERVERS = [
 ]
 
 const DEFAULT_SERVER_INDEX = 0;
-const MAXIMUM_POSSIBLE_LENGTH = 15; // Excluding spaces, no word must be bigger than this (maximum number of hint inputs)
+const MAXIMUM_POSSIBLE_LENGTH = 20; // Excluding spaces, no word must be bigger than this (maximum number of hint inputs)
 const HINT_SPACE_WIDTH = "40px";
 
 const MAX_WORDS_SHOWN = 20;
