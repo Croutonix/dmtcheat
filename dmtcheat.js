@@ -1,27 +1,16 @@
-const SERVERS = [
+var servers = [
 	{
 		name: "Mineplex",
 		game: "Draw My Thing",
-		wordList: "./wordlist-mineplex.txt",
-		maxWordCount: 3,  // Maximum number of words
+		wordListFile: "./wordlist-mineplex.txt",
 		defaultWordCount: 1,
-		//			  1wd  2words  3words
-		minWordLength: [[2], [3, 3], [3, 2, 4]],   // Here if the user selects 3 words for example, then the minimum of the
-												   // first word is 3 letters, 2 letters for the second and 4 for the third
-		maxWordLength: [[11], [11, 6], [4, 3, 7]], // Same thing with maximum
-												   // There doesn't have to be a guess that matches the extremums:
-												   // ex: There might not be a guess that has 2 words with 3 letters each but there might be two
-												   // guesses like that: big feet, round pig. In this case, 3 letters is possible for both words
 		defaultWordLength: [[5], [5, 4], [3, 2, 4]],
 	},
 	{
 		name: "Hive",
 		game: "Draw It",
-		wordList: "./wordlist-hive.txt",
-		maxWordCount: 2,
+		wordListFile: "./wordlist-hive.txt",
 		defaultWordCount: 1,
-		minWordLength: [[3], [3, 3]],
-		maxWordLength: [[12], [7, 7]],
 		defaultWordLength: [[5], [5, 5]],
 	},
 	// You can add more servers if you want, they will appear in the list automatically
@@ -34,8 +23,7 @@ const HINT_SPACE_WIDTH = "40px";
 const MAX_WORDS_SHOWN = 20;
 const SPLIT_WORDS_COLUMN_AT = 10;
 
-var selectedServer = SERVERS[DEFAULT_SERVER_INDEX];
-var wordList;
+var selectedServer = servers[DEFAULT_SERVER_INDEX];
 var wordCount;
 var wordLength;
 
@@ -57,30 +45,66 @@ var clearInputBtn;
 var missingWordDiv;
 
 /**
+	Load word lists from all server and find max word count, 
+	min/max possible lengths for each word count
+*/
+function loadWordLists() {
+	for (var s = 0; s < servers.length; s++) {
+		// Load word list for that server
+		var rawFile = new XMLHttpRequest();
+		rawFile.open("GET", servers[s].wordListFile, false);
+		rawFile.onreadystatechange = function() {
+			if (rawFile.readyState === 4) {
+				if (rawFile.status === 200 || rawFile.status === 0) {
+					servers[s].wordList = rawFile.responseText.split(",").sort();
+				}
+			}
+		};
+		rawFile.send(null);
+		
+		// Find max and min
+		servers[s].maxWordCount = 1;
+		var max = [];
+		var min = [];
+		for (var i = 0; i < 3; i++) {
+			max.push([]);
+			min.push([]);
+			for (var j = 0; j <= i; j++) {
+				max[i].push(0);
+				min[i].push(100);
+			}
+		}
+		
+		for (var i = 0; i < servers[s].wordList.length; i++) {
+			parts = servers[s].wordList[i].split(" ");
+			wordCount = parts.length;
+			if (wordCount > servers[s].maxWordCount) servers[s].maxWordCount = wordCount;
+			for (var j = 0; j < wordCount; j++) {
+				var length = parts[j].length;
+				if (length < min[wordCount-1][j]) min[wordCount-1][j] = length
+				if (length > max[wordCount-1][j]) max[wordCount-1][j] = length
+			}
+		}
+		
+		servers[s].minWordLength = min;
+		servers[s].maxWordLength = max;
+	}
+	
+	console.log(servers);
+}
+
+/**
 	Called when a server is selected
 	@param server Server object
 */
 function onServerSelected(server) {
-
 	selectedServer = server;
 	currentHint = 0;
 
-	// Load word list for that server
-	var rawFile = new XMLHttpRequest();
-	rawFile.open("GET", server.wordList, false);
-	rawFile.onreadystatechange = function() {
-		if (rawFile.readyState === 4) {
-			if (rawFile.status === 200 || rawFile.status === 0) {
-				wordList = rawFile.responseText.split(",").sort();
-			}
-		}
-	};
-	rawFile.send(null);
-
+	// Update elements for this server name and words
 	document.getElementById("title").innerHTML = server.game + " Cheat";
-
-	document.getElementById("word-list-modal-title").innerHTML = "Complete list of known words for this server <b>- " + wordList.length + " words</b>";
-	document.getElementById("word-list-modal-list").innerHTML = wordList.join("<br>");
+	document.getElementById("word-list-modal-title").innerHTML = "Complete list of known words for this server <b>- " + selectedServer.wordList.length + " words</b>";
+	document.getElementById("word-list-modal-list").innerHTML = selectedServer.wordList.join("<br>");
 
 	// Select default settings for that server
 	wordCount = server.defaultWordCount
@@ -106,7 +130,7 @@ function onServerSelected(server) {
 */
 function onWordCountChanged(count) {
 
-	wordLength = selectedServer.defaultWordLength[count-1];
+	wordLength = selectedServer.defaultWordLength[count-1].slice(0);
 	for (var i = 0; i < (count == 1 ? 1 : count+1); i++) {
 		var word = (i <= 1 ? 0 : i-1);
 		wordLengthSpinner[i].min = selectedServer.minWordLength[count-1][word];
@@ -195,8 +219,8 @@ function findWords() {
 
 	// Find words in list matching template
 	matchWords = [];
-	for (var i = 0; i < wordList.length; i++) {
-		var word = wordList[i];
+	for (var i = 0; i < selectedServer.wordList.length; i++) {
+		var word = selectedServer.wordList[i];
 		if (template.length == word.length) {
 			var match = true;
 			for (var j = 0; j < word.length; j++) {
@@ -308,15 +332,18 @@ function copyToClipboard(text) {
 }
 
 function main() {
+	// Load server word lists
+	loadWordLists();
+	
 	// Server dropdown, add servers to list
 	var serverDropdown = document.getElementById("server-dropdown");
-	for (var i = 0; i < SERVERS.length; i++) {
+	for (var i = 0; i < servers.length; i++) {
 		var option = document.createElement("option");
-		option.text = SERVERS[i].name + " - " + SERVERS[i].game;
+		option.text = servers[i].name + " - " + servers[i].game;
 		serverDropdown.add(option, i);
 	}
 	serverDropdown.addEventListener("change", function() {
-		onServerSelected(SERVERS[this.selectedIndex]);
+		onServerSelected(servers[this.selectedIndex]);
 	});
 
 	// Word count radios
