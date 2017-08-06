@@ -6,12 +6,12 @@ const SERVERS = [
 		maxWordCount: 3,  // Maximum number of words
 		defaultWordCount: 1,
 		//              1wd  2words  3words
-		minWordLength: [[2], [3, 3], [3, 2, 4]],  // Here if the user selects 3 words for example, then the minimum of the
-		                                          // first word is 3 letters, 2 letters for the second and 4 for the third
-		maxWordLength: [[11], [9, 6], [4, 3, 7]], // Same thing with maximum
-		                                          // There doesn't have to be a guess that matches the extremums:
-		                                          // ex: There might not be a guess that has 2 words with 3 letters each but there might be two
-		                                          // guesses like that: big feet, round pig. In this case, 3 letters is possible for both words
+		minWordLength: [[2], [3, 3], [3, 2, 4]],   // Here if the user selects 3 words for example, then the minimum of the
+		                                           // first word is 3 letters, 2 letters for the second and 4 for the third
+		maxWordLength: [[11], [11, 6], [4, 3, 7]], // Same thing with maximum
+		                                           // There doesn't have to be a guess that matches the extremums:
+		                                           // ex: There might not be a guess that has 2 words with 3 letters each but there might be two
+		                                           // guesses like that: big feet, round pig. In this case, 3 letters is possible for both words
 		defaultWordLength: [[5], [5, 4], [3, 2, 4]],
 	},
 	{
