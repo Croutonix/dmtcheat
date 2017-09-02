@@ -75,8 +75,15 @@ function loadWordLists() {
 			}
 		}
 		
+		var word;
+		var parts;
+		var wordCount;
 		for (var i = 0; i < servers[s].wordList.length; i++) {
-			parts = servers[s].wordList[i].split(" ");
+			word = servers[s].wordList[i];
+			if (!servers[s].allowNumbers && /[0-9]/.test(word)) {
+				servers[s].allowNumbers = true;
+			}
+			parts = word.split(" ");
 			wordCount = parts.length;
 			if (wordCount > servers[s].maxWordCount) servers[s].maxWordCount = wordCount;
 			for (var j = 0; j < wordCount; j++) {
@@ -391,7 +398,11 @@ function main() {
 		input.className = "input-hint";
 		input.style.display = "none";
 		input.addEventListener("input", function() {
-			this.value = this.value.replace(/[^a-zA-Z]/g, "").toUpperCase();
+			if (selectedServer.allowNumbers) {
+				this.value = this.value.replace(/[^a-zA-Z0-9]/g, "").toUpperCase();
+			} else {
+				this.value = this.value.replace(/[^a-zA-Z]/g, "").toUpperCase();
+			}
 			if (this.value.length > 1) this.value = this.value.substring(1);
 
 			findWords(); // Update word list
