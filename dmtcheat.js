@@ -11,7 +11,7 @@ var servers = [
 		game: "Draw It",
 		wordListFile: "./wordlist-hive.txt",
 		defaultWordCount: 1,
-		defaultWordLength: [[5], [5, 5]],
+		defaultWordLength: [[5], [5, 5], [3, 3, 5]],
 	},
 	// You can add more servers if you want, they will appear in the list automatically
 ]
