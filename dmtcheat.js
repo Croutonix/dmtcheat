@@ -244,15 +244,12 @@ function findWords() {
 	// Update word list
 	var found = matchWords.length;
 	if (found == 0) {
-		document.getElementById("word-found-title").innerHTML = "No matches found";
-		document.getElementById("word-found-label").innerHTML = "Submit a missing word";
+		document.getElementById("word-found-label").innerHTML = "No matches found";
 		missingWordDiv.style.display = "block";
 	} else if (found == 1) {
-		document.getElementById("word-found-title").innerHTML = "Word list";
 		document.getElementById("word-found-label").innerHTML = "1 match found";
 		missingWordDiv.style.display = "none";
 	} else {
-		document.getElementById("word-found-title").innerHTML = "Word list";
 		document.getElementById("word-found-label").innerHTML = found + " matches found";
 		missingWordDiv.style.display = "none";
 	}
