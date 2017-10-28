@@ -403,6 +403,8 @@ function main() {
 			if (this.value.length > 1) this.value = this.value.substring(1);
 
 			findWords(); // Update word list
+
+			if (currentHint < rawWordLength-1) changeCurrentHint(1);
 		});
 		input.addEventListener("keydown", function(event) {
 			if (event.keyCode == 37) {  // Left
