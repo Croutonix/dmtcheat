@@ -13,6 +13,13 @@ var servers = [
 		defaultWordCount: 1,
 		defaultWordLength: [[5], [5, 5], [3, 3, 5]],
 	},
+	{
+		name: "Hypixel",
+		game: "Guess The Build",
+		wordListFile: "./wordlist-hypixel.txt",
+		defaultWordCount: 1,
+		defaultWordLength: [[5], [5, 5], [3, 3, 5]],
+	},
 	// You can add more servers if you want, they will appear in the list automatically
 ]
 
