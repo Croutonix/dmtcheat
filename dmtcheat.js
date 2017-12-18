@@ -18,7 +18,7 @@ var servers = [
 		game: "Guess The Build",
 		wordListFile: "./wordlist-hypixel.txt",
 		defaultWordCount: 1,
-		defaultWordLength: [[5], [5, 5], [3, 3, 5]],
+		defaultWordLength: [[5], [5, 4], [3, 2, 4]],
 	},
 	// You can add more servers if you want, they will appear in the list automatically
 ]
