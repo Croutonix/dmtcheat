@@ -33,5 +33,6 @@ serverFile = open(filename, "w")
 serverFile.write(",".join(wordList))
 serverFile.close()
 
-print("{0} new words added, {1} words total.".format(len(added), len(wordList)))
+print("{0} out of {1} new words added, {2} words total."
+      .format(len(added), len(newWordsList), len(wordList)))
 print("\n" + ", ".join(added))
